@@ -1,41 +1,99 @@
+# =========================
+# Taskr - C++ / Windows
+# =========================
+
 # Prerequisites
 *.d
 
-# Compiled Object files
-*.slo
-*.lo
+# =========================
+# Compiled Object Files
+# =========================
 *.o
 *.obj
+*.slo
+*.lo
 
+# =========================
 # Precompiled Headers
+# =========================
 *.gch
 *.pch
 
-# Linker files
+# =========================
+# Linker / Build Artifacts
+# =========================
 *.ilk
+*.map
 
-# Debugger Files
+# =========================
+# Debug / Symbols
+# =========================
 *.pdb
+*.dwo
 
-# Compiled Dynamic libraries
+# =========================
+# Libraries
+# =========================
+*.a
+*.lib
+*.la
+*.lai
 *.so
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
+# =========================
 # Executables
+# =========================
 *.exe
 *.out
 *.app
 
-# debug information files
-*.dwo
+# =========================
+# Build folders
+# =========================
+# build outputs (NOT scripts)
+cmake-build-*/
+out/
+bin/
+obj/
+cmake-build-*/
+out/
+bin/
+obj/
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+*.code-workspace
+
+# =========================
+# Windows / System files
+# =========================
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+
+# =========================
+# MinGW / GCC artifacts
+# =========================
+*.stackdump
+
+# =========================
+# Optional: Taskr runtime data (if you add later)
+# =========================
+*.session
+*.record
+*.taskr
