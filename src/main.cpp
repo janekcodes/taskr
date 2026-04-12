@@ -33,12 +33,6 @@
 =========================================================
  Window Procedure (Event Handler)
 =========================================================
-
- Handles all Windows messages:
- - Paint events (UI rendering)
- - Keyboard input
- - Window lifecycle events
-=========================================================
 */
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
@@ -80,23 +74,26 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
         FillRect(hdc, &rect, bg);
         DeleteObject(bg);
 
-        // Transparent text background for clean UI
+        // Transparent text background
         SetBkMode(hdc, TRANSPARENT);
         SetTextColor(hdc, RGB(0, 0, 0));
 
         // =================================================
         // Responsive font scaling
-        // - Adjusts text size based on window height
-        // - Keeps UI readable at all sizes
         // =================================================
-        int fontSize = height / 8;
+        int titleSize = height / 10;
+        if (titleSize < 24) titleSize = 24;
+        if (titleSize > 72) titleSize = 72;
 
-        // Clamp font size for usability
-        if (fontSize < 18) fontSize = 18;
-        if (fontSize > 80) fontSize = 80;
+        int subtitleSize = height / 20;
+        if (subtitleSize < 14) subtitleSize = 14;
+        if (subtitleSize > 36) subtitleSize = 36;
 
-        HFONT font = CreateFontW(
-            fontSize, 0, 0, 0, FW_BOLD,
+        // =================================================
+        // Fonts
+        // =================================================
+        HFONT titleFont = CreateFontW(
+            titleSize, 0, 0, 0, FW_BOLD,
             FALSE, FALSE, FALSE,
             DEFAULT_CHARSET,
             OUT_OUTLINE_PRECIS,
@@ -106,32 +103,61 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             L"Segoe UI"
         );
 
-        HFONT oldFont = (HFONT)SelectObject(hdc, font);
+        HFONT subtitleFont = CreateFontW(
+            subtitleSize, 0, 0, 0, FW_NORMAL,
+            FALSE, FALSE, FALSE,
+            DEFAULT_CHARSET,
+            OUT_OUTLINE_PRECIS,
+            CLIP_DEFAULT_PRECIS,
+            CLEARTYPE_QUALITY,
+            VARIABLE_PITCH,
+            L"Segoe UI"
+        );
+
+        HFONT oldFont = (HFONT)SelectObject(hdc, titleFont);
 
         // =================================================
-        // UI Text (temporary system state display)
+        // UI Text
         // =================================================
-        const wchar_t* text = L"Taskr: In Progress 🚧";
+        const wchar_t* title = L"Taskr";
+        const wchar_t* subtitle = L"In Progress 🚧";
 
-        // Centered rendering (modern UI style)
+        // Layout regions
+        RECT titleRect = rect;
+        titleRect.bottom = height / 2;
+
+        RECT subtitleRect = rect;
+        subtitleRect.top = height / 2;
+
+        // Draw title
         DrawTextW(
             hdc,
-            text,
+            title,
             -1,
-            &rect,
+            &titleRect,
             DT_CENTER | DT_VCENTER | DT_SINGLELINE
         );
 
-        // Cleanup GDI objects (important for memory safety)
+        // Draw subtitle
+        SelectObject(hdc, subtitleFont);
+        DrawTextW(
+            hdc,
+            subtitle,
+            -1,
+            &subtitleRect,
+            DT_CENTER | DT_VCENTER | DT_SINGLELINE
+        );
+
+        // Cleanup
         SelectObject(hdc, oldFont);
-        DeleteObject(font);
+        DeleteObject(titleFont);
+        DeleteObject(subtitleFont);
 
         EndPaint(hwnd, &ps);
         return 0;
     }
     }
 
-    // Default Windows behavior for unhandled messages
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
@@ -152,10 +178,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {
     wc.hInstance = hInstance;
     wc.lpszClassName = CLASS_NAME;
 
-    // Cursor style
     wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-
-    // Default window background
     wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 
     RegisterClassW(&wc);
@@ -178,7 +201,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {
 
     if (!hwnd) return 0;
 
-    // Show window
     ShowWindow(hwnd, nCmdShow);
     UpdateWindow(hwnd);
 
