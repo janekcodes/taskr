@@ -1,17 +1,19 @@
 # ⚙️ Taskr
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.1-blue)](https://github.com/janekcodes/taskr/releases)
+[![Status](https://img.shields.io/badge/status-in%20development-orange)](https://github.com/janekcodes/taskr)
 [![Maintenance](https://img.shields.io/badge/Maintained-Active-blue)](https://github.com/janekcodes/taskr)
+[![Version](https://img.shields.io/badge/version-0.1-blue)](https://github.com/janekcodes/taskr/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows-blue)](https://www.microsoft.com/windows)
 [![Language](https://img.shields.io/badge/language-C++-blue.svg)]()
 [![Build](https://img.shields.io/badge/build-MinGW--w64-green)]()
-[![Status](https://img.shields.io/badge/status-in%20development-orange)](https://github.com/janekcodes/taskr)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/janekcodes/taskr/pulls)
 [![Issues](https://img.shields.io/github/issues/janekcodes/taskr)](https://github.com/janekcodes/taskr/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/janekcodes/taskr)](https://github.com/janekcodes/taskr/commits/main)
-
----
+[![Security](https://img.shields.io/badge/Security-Policy-red)](SECURITY.md)
+[![Contributors](https://img.shields.io/github/contributors/janekcodes/taskr)](https://github.com/janekcodes/taskr/graphs/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/janekcodes/taskr)](https://github.com/janekcodes/taskr/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/janekcodes/taskr)](https://github.com/janekcodes/taskr/network)
 
 > A fast, compact, and highly optimized Windows automation tool built to simplify repetitive tasks.
 
@@ -19,7 +21,6 @@
 
 ## 📌 Navigation
 
-- 📌 [Motivation](#-motivation)
 - 🧠 [Roadmap](docs/ROADMAP.md)
 - 🏗️ [Architecture](docs/ARCHITECTURE.md)
 - 🤝 [Contributing](docs/CONTRIBUTING.md)
@@ -249,14 +250,6 @@ taskr/
 - Recorder → Planned  
 - Playback → Planned  
 - Automation Core → Planned 
-
----
-
-## 📌 Final Note
-
-Taskr is still early, but the goal is clear:
-
-> build a lightweight, native automation engine that stays fast, minimal, and fully under control.
 
 ---
 
