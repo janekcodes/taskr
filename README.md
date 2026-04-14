@@ -161,16 +161,6 @@ taskr/
 
 ---
 
-## Status
-
-- UI Foundation → Complete  
-- Input Engine → In Progress  
-- Recorder → Planned  
-- Playback → Planned  
-- Automation Core → Planned 
-
----
-
 ## License
 
 This project is licensed under the MIT License.
