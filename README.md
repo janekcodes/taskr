@@ -1,4 +1,4 @@
-# ⚙️ Taskr
+# Taskr
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-in%20development-orange)](https://github.com/janekcodes/taskr)
@@ -19,18 +19,17 @@
 
 ---
 
-## 📌 Navigation
+## Navigation
 
-- 🧠 [Roadmap](docs/ROADMAP.md)
-- 🏗️ [Architecture](docs/ARCHITECTURE.md)
-- 🤝 [Contributing](docs/CONTRIBUTING.md)
-- 🧾 [Commit Convention](docs/COMMIT_CONVENTION.md)
-- 📜 [Code of Conduct](docs/CODE_OF_CONDUCT.md)
-- 📜 [License](LICENSE)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Contributing](docs/CONTRIBUTING.md)
+- [Commit Convention](docs/COMMIT_CONVENTION.md)
+- [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+- [License](LICENSE)
 
 ---
 
-## 📌 Motivation
+## Motivation
 
 As I started using different automation tools on Windows, I kept running into the same frustrations.
 
@@ -60,82 +59,28 @@ Taskr is still early, but the long-term vision is clear:
 
 ---
 
-## ✨ Features (Current Phase)
+## Tech Stack
 
-### 🧱 Core System
-- Native WinAPI window (no frameworks)
-- Fully resizable desktop UI
-- Custom rendering system (GDI)
-- Responsive layout scaling
-- Clean message loop architecture
+### Core Language
+- C++ 
 
-### 🎨 UI System
-- Centered dynamic text rendering
-- Responsive font scaling
-- Minimal white UI design
-- Status display ("Task: In Progress")
-
-### ⚙️ Build System
-- MinGW-w64 compatible
-- One-command build via `.bat`
-- Optimized compilation (`-Os -s`)
-
----
-
-## 🧠 Vision
-
-Taskr aims to evolve into a full automation engine similar to:
-
-- TinyTask (lightweight macro recorder)
-- AutoHotkey (automation scripting engine)
-
-but focused on:
-
-- ⚡ Native performance (C++)
-- 📦 Minimal binary size (~1MB target)
-- 🧠 Simplicity and clarity
-- 🔧 Full system-level control
-
----
-
-## 🧰 Tech Stack
-
-### 💻 Core Language
-- C++ (17/20 standard, depending on compiler support)
-
-### 🪟 Platform
+## Platform
 - Windows API (WinAPI)
 - GDI (Graphics Device Interface) for rendering
 - User32 / Kernel32 system libraries
 
-### ⚙️ Build System
+### Build System
 - MinGW-w64 (GCC 15.x)
 - Batch scripting (`build.bat`) for automation
 
-### 🎨 UI & Rendering
-- Native WinAPI windowing system
-- GDI text rendering (CreateFont, DrawTextW)
-- Manual repaint system (WM_PAINT)
-
-### 🧠 Architecture Style
-- Modular component-based architecture
-- Engine-driven design (Task Engine → Input Layer → Recorder → Player)
-- Event-driven message loop (WinMain / WndProc)
-
-### 🧪 Tooling
+### Tooling
 - VS Code (development environment)
 - Git + GitHub (version control)
 - Windows Terminal / PowerShell (build & run)
 
-### 🚀 Optimization Focus
-- Minimal binary size (~1MB target)
-- No external dependencies
-- Compile-time optimization (`-Os -s`)
-- Native system calls only
-
 ---
 
-## 🚀 Build Instructions
+## Build Instructions
 
 ### Requirements
 - MinGW-w64 (g++)
@@ -149,7 +94,7 @@ build\build.bat
 
 ---
 
-## ▶️ Run
+## Run
 
 ```bash
 .\taskr.exe
@@ -157,7 +102,7 @@ build\build.bat
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```bash
 taskr/
@@ -216,48 +161,11 @@ taskr/
 
 ---
 
-## 🧠 Roadmap
-
-### Phase 1 — UI Foundation ✔
-- WinAPI window system
-- Responsive rendering engine
-- Basic UI layout system
-
-### Phase 2 — Input Engine (Next)
-- Keyboard hook system
-- Mouse hook system
-- Input event tracking
-
-### Phase 3 — Automation Core
-- Macro recording system
-- Playback engine
-- Timing accuracy system
-
-### Phase 4 — Advanced Features
-- Script engine
-- UI controls (buttons, panels)
-- Overlay mode
-- Plugin architecture
-
-👉 [Roadmap](docs/ROADMAP.md)
-
----
-
-## 🚀 Status
-
-- UI Foundation → Complete  
-- Input Engine → In Progress  
-- Recorder → Planned  
-- Playback → Planned  
-- Automation Core → Planned 
-
----
-
-## 📜 License
+## License
 
 This project is licensed under the MIT License.
 
-## 📜 Code of Conduct
+## Code of Conduct
 
 We keep communication respectful and focused:  
-👉 [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+[Code of Conduct](docs/CODE_OF_CONDUCT.md)
