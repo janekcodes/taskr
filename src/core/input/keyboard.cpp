@@ -1,31 +1,26 @@
 #include "keyboard.h"
 
-/*
-=========================================================
- Keyboard Input Implementation
-=========================================================
-*/
+std::unordered_map<int, bool> Keyboard::currentState;
+std::unordered_map<int, bool> Keyboard::previousState;
 
-Keyboard::Keyboard() {
-    // Reserved for future initialization
+void Keyboard::update() {
+    previousState = currentState;
+
+    for (int key = 0; key < 256; ++key) {
+        currentState[key] = (GetAsyncKeyState(key) & 0x8000) != 0;
+    }
 }
 
-Keyboard::~Keyboard() {
-    // Reserved for cleanup (hooks later)
+bool Keyboard::isKeyDown(Key key) {
+    return currentState[static_cast<int>(key)];
 }
 
-void Keyboard::initialize() {
-    // Future:
-    // - SetWindowsHookEx(WH_KEYBOARD_LL, ...)
-    // - Register callback for key events
+bool Keyboard::isKeyPressed(Key key) {
+    int k = static_cast<int>(key);
+    return currentState[k] && !previousState[k];
 }
 
-void Keyboard::shutdown() {
-    // Future:
-    // - Unhook keyboard listener
-}
-
-bool Keyboard::isKeyDown(int key) {
-    // Temporary implementation (polling-based)
-    return (GetAsyncKeyState(key) & 0x8000);
+bool Keyboard::isKeyReleased(Key key) {
+    int k = static_cast<int>(key);
+    return !currentState[k] && previousState[k];
 }
