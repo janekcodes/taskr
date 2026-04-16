@@ -1,5 +1,5 @@
 #pragma once
-#include <windows.h>
+#include <Windows.h>
 
 /*
 =========================================================
@@ -10,24 +10,42 @@ Location:
     src/core/input/
 
 Responsibility:
-    Handles all mouse input logic for Taskr.
+    Handles raw mouse input state.
 
-Design Rule:
-    - Only raw mouse state handling here
-    - No automation logic
-    - Engine will interpret events later
+Design Rules:
+    - No engine logic here
+    - Frame-based polling system
+    - Clean, queryable interface
 =========================================================
 */
 
 class Mouse {
 public:
-    Mouse();
-    ~Mouse();
+    // Must be called once per frame
+    static void update();
 
-    void initialize();
-    void shutdown();
+    // Position
+    static POINT getPosition();
+    static int getX();
+    static int getY();
 
-    POINT getPosition();
-    bool leftDown();
-    bool rightDown();
+    // Current state
+    static bool isLeftDown();
+    static bool isRightDown();
+
+    // Edge detection
+    static bool isLeftPressed();
+    static bool isRightPressed();
+
+    static bool isLeftReleased();
+    static bool isRightReleased();
+
+private:
+    static bool currentLeft;
+    static bool previousLeft;
+
+    static bool currentRight;
+    static bool previousRight;
+
+    static POINT position;
 };

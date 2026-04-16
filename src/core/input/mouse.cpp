@@ -1,39 +1,58 @@
 #include "mouse.h"
 
-/*
-=========================================================
- Mouse Input Implementation
-=========================================================
-*/
+bool Mouse::currentLeft = false;
+bool Mouse::previousLeft = false;
 
-Mouse::Mouse() {
-    // Reserved
-}
+bool Mouse::currentRight = false;
+bool Mouse::previousRight = false;
 
-Mouse::~Mouse() {
-    // Reserved
-}
+POINT Mouse::position = { 0, 0 };
 
-void Mouse::initialize() {
-    // Future:
-    // - SetWindowsHookEx(WH_MOUSE_LL, ...)
-}
+void Mouse::update() {
+    // Store previous state
+    previousLeft = currentLeft;
+    previousRight = currentRight;
 
-void Mouse::shutdown() {
-    // Future:
-    // - Remove mouse hook
+    // Update current button states
+    currentLeft  = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0;
+    currentRight = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
+
+    // Update position
+    GetCursorPos(&position);
 }
 
 POINT Mouse::getPosition() {
-    POINT p;
-    GetCursorPos(&p);
-    return p;
+    return position;
 }
 
-bool Mouse::leftDown() {
-    return (GetAsyncKeyState(VK_LBUTTON) & 0x8000);
+int Mouse::getX() {
+    return position.x;
 }
 
-bool Mouse::rightDown() {
-    return (GetAsyncKeyState(VK_RBUTTON) & 0x8000);
+int Mouse::getY() {
+    return position.y;
+}
+
+bool Mouse::isLeftDown() {
+    return currentLeft;
+}
+
+bool Mouse::isRightDown() {
+    return currentRight;
+}
+
+bool Mouse::isLeftPressed() {
+    return currentLeft && !previousLeft;
+}
+
+bool Mouse::isRightPressed() {
+    return currentRight && !previousRight;
+}
+
+bool Mouse::isLeftReleased() {
+    return !currentLeft && previousLeft;
+}
+
+bool Mouse::isRightReleased() {
+    return !currentRight && previousRight;
 }

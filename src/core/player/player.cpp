@@ -2,51 +2,41 @@
 
 /*
 =========================================================
- Player Implementation (Skeleton)
+ Player Implementation
 =========================================================
 */
 
 Player::Player()
-    : m_isPlaying(false)
+    : m_state(PlayerState::Stopped)
 {
-    // Reserved for setup
 }
 
 Player::~Player() {
-    // Ensure safe shutdown state
-    stop();
-}
-
-void Player::initialize() {
-    // Future:
-    // - Prepare playback system
-    // - Load recorded event buffer
-}
-
-void Player::shutdown() {
-    // Future:
-    // - Clear playback state
     stop();
 }
 
 void Player::play() {
-    // Future:
-    // - Start replaying recorded input events
-    m_isPlaying = true;
+    m_state = PlayerState::Playing;
 }
 
 void Player::stop() {
-    // Future:
-    // - Stop all playback immediately
-    m_isPlaying = false;
+    m_state = PlayerState::Stopped;
 }
 
 void Player::pause() {
-    // Future:
-    // - Pause playback without clearing state
-    m_isPlaying = false;
+    if (m_state == PlayerState::Playing) {
+        m_state = PlayerState::Paused;
+    }
 }
 
 bool Player::isPlaying() const {
-    return m_isPlaying;
+    return m_state == PlayerState::Playing;
+}
+
+bool Player::isPaused() const {
+    return m_state == PlayerState::Paused;
+}
+
+bool Player::isStopped() const {
+    return m_state == PlayerState::Stopped;
 }

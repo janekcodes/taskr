@@ -9,32 +9,41 @@ Location:
     src/core/player/
 
 Responsibility:
-    Executes (replays) recorded input events.
+    Replays recorded input events.
 
 Role in Engine:
     Recorder → stores actions
-    Player → replays actions
-    Engine → controls flow
+    Player   → replays actions
+    Engine   → controls flow
+
+Design Rules:
+    - No input capture here
+    - Only playback state + control
+    - Frame update handled externally
 =========================================================
 */
+
+enum class PlayerState {
+    Stopped,
+    Playing,
+    Paused
+};
 
 class Player {
 public:
     Player();
     ~Player();
 
-    // Lifecycle
-    void initialize();
-    void shutdown();
-
     // Playback control
     void play();
     void stop();
     void pause();
 
-    // State query
+    // State queries
     bool isPlaying() const;
+    bool isPaused() const;
+    bool isStopped() const;
 
 private:
-    bool m_isPlaying;
+    PlayerState m_state;
 };
