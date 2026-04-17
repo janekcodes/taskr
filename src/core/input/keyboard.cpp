@@ -1,11 +1,21 @@
 #include "keyboard.h"
 
-std::unordered_map<int, bool> Keyboard::currentState;
-std::unordered_map<int, bool> Keyboard::previousState;
+/*
+=========================================================
+ Keyboard Input Implementation
+=========================================================
+*/
+
+bool Keyboard::currentState[256] = { false };
+bool Keyboard::previousState[256] = { false };
 
 void Keyboard::update() {
-    previousState = currentState;
+    // Copy current state → previous state
+    for (int i = 0; i < 256; ++i) {
+        previousState[i] = currentState[i];
+    }
 
+    // Refresh current key states
     for (int key = 0; key < 256; ++key) {
         currentState[key] = (GetAsyncKeyState(key) & 0x8000) != 0;
     }

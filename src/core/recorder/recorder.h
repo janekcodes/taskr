@@ -6,33 +6,44 @@
  Recorder Module (Taskr)
 =========================================================
 
-Location:
-    src/core/recorder/
-
 Responsibility:
     Records user input events (keyboard + mouse)
-    and stores them for later playback by Player.
+    for later playback by Player.
 
 Role in Engine:
     Input → Recorder → Player → Engine
+
+Design:
+    - No playback logic
+    - State-based recording system
+    - Future: event buffer storage
 =========================================================
 */
+
+enum class RecorderState {
+    Stopped,
+    Recording,
+    Paused
+};
 
 class Recorder {
 public:
     Recorder();
     ~Recorder();
 
-    // Lifecycle
-    void initialize();
-    void shutdown();
-
     // Recording control
     void startRecording();
     void stopRecording();
+    void pauseRecording();
 
+    // State queries
     bool isRecording() const;
+    bool isPaused() const;
+    bool isStopped() const;
 
 private:
-    bool m_isRecording;
+    RecorderState m_state = RecorderState::Stopped;
+
+    // Future:
+    // std::vector<InputEvent> m_events;
 };

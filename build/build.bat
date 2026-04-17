@@ -2,42 +2,40 @@
 :: =====================================================
 :: Taskr Build Script (MinGW-w64)
 :: =====================================================
-:: Purpose:
-::  - Compile Taskr using g++
-::  - Output optimized Windows GUI executable
-::  - Keep build process simple and repeatable
-:: =====================================================
 
 echo =====================================
 echo   Building Taskr (C++ / WinAPI)
 echo =====================================
 
-:: Always run from script directory
 cd /d %~dp0
 
 :: -----------------------------------------------------
-:: Project Paths
+:: Output
 :: -----------------------------------------------------
-set SRC=..\src\main.cpp
 set OUT=..\taskr.exe
 
 :: -----------------------------------------------------
-:: Compiler Settings
+:: Source Files (ALL CPP FILES)
 :: -----------------------------------------------------
-:: -Os  -> optimize for size
-:: -s   -> strip symbols (smaller exe)
-:: -mwindows -> Windows GUI app (no console window)
-:: -lgdi32 -> GDI rendering support
-:: -----------------------------------------------------
-
-echo [INFO] Compiling source...
-echo [INFO] Source: %SRC%
-echo [INFO] Output: %OUT%
-
-g++ %SRC% -std=c++17 -Os -s -mwindows -lgdi32 -o %OUT%
+set SOURCES=^
+..\src\main.cpp ^
+..\src\core\engine\task_engine.cpp ^
+..\src\utils\time.cpp ^
+..\src\core\input\keyboard.cpp ^
+..\src\core\input\mouse.cpp ^
+..\src\core\recorder\recorder.cpp ^
+..\src\core\player\player.cpp
 
 :: -----------------------------------------------------
-:: Build Result Handling
+:: Build
+:: -----------------------------------------------------
+
+echo [INFO] Compiling project...
+
+g++ %SOURCES% -std=c++17 -Os -s -mwindows -lgdi32 -o %OUT%
+
+:: -----------------------------------------------------
+:: Result
 :: -----------------------------------------------------
 if %errorlevel% == 0 (
     echo.
@@ -49,7 +47,6 @@ if %errorlevel% == 0 (
     echo.
     echo =====================================
     echo   BUILD FAILED
-    echo   Check errors above
     echo =====================================
 )
 

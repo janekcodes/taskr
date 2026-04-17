@@ -6,22 +6,18 @@
  Mouse Input Module (Taskr)
 =========================================================
 
-Location:
-    src/core/input/
-
 Responsibility:
     Handles raw mouse input state.
 
-Design Rules:
-    - No engine logic here
-    - Frame-based polling system
-    - Clean, queryable interface
+Design:
+    - Frame-based polling
+    - No engine logic
+    - Clean state + position tracking
 =========================================================
 */
 
 class Mouse {
 public:
-    // Must be called once per frame
     static void update();
 
     // Position
@@ -29,14 +25,13 @@ public:
     static int getX();
     static int getY();
 
-    // Current state
+    // Button state
     static bool isLeftDown();
     static bool isRightDown();
 
     // Edge detection
     static bool isLeftPressed();
     static bool isRightPressed();
-
     static bool isLeftReleased();
     static bool isRightReleased();
 

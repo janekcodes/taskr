@@ -1,5 +1,11 @@
 #include "mouse.h"
 
+/*
+=========================================================
+ Mouse Input Implementation
+=========================================================
+*/
+
 bool Mouse::currentLeft = false;
 bool Mouse::previousLeft = false;
 
@@ -10,14 +16,14 @@ POINT Mouse::position = { 0, 0 };
 
 void Mouse::update() {
     // Store previous state
-    previousLeft = currentLeft;
+    previousLeft  = currentLeft;
     previousRight = currentRight;
 
-    // Update current button states
+    // Update button states
     currentLeft  = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0;
     currentRight = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
 
-    // Update position
+    // Update cursor position
     GetCursorPos(&position);
 }
 

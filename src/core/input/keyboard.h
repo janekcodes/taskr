@@ -1,49 +1,41 @@
 #pragma once
 #include <Windows.h>
-#include <unordered_map>
 
 /*
 =========================================================
  Keyboard Input Module (Taskr)
 =========================================================
 
-Location:
-    src/core/input/
-
 Responsibility:
     Handles raw keyboard input state.
 
-Design Rules:
-    - No engine/game logic here
-    - Provides clean, queryable input state
-    - Polling-based for now (hook system later)
+Design:
+    - Frame-based polling
+    - No engine logic
+    - Fast array-based state tracking
 =========================================================
 */
 
-enum class Key {
+enum class Key : int {
     Escape = VK_ESCAPE,
     Space  = VK_SPACE,
+    P      = 0x50,
 
     A = 0x41,
     B = 0x42,
     C = 0x43,
     D = 0x44
-    // Expand as needed
 };
 
 class Keyboard {
 public:
-    // Must be called once per frame/update loop
     static void update();
 
-    // Current state
     static bool isKeyDown(Key key);
-
-    // Edge detection
-    static bool isKeyPressed(Key key);   // down this frame, not last
-    static bool isKeyReleased(Key key);  // up this frame, down last
+    static bool isKeyPressed(Key key);
+    static bool isKeyReleased(Key key);
 
 private:
-    static std::unordered_map<int, bool> currentState;
-    static std::unordered_map<int, bool> previousState;
+    static bool currentState[256];
+    static bool previousState[256];
 };
