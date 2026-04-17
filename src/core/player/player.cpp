@@ -16,7 +16,9 @@ Player::~Player() {
 }
 
 void Player::play() {
-    m_state = PlayerState::Playing;
+    if (m_state != PlayerState::Playing) {
+        m_state = PlayerState::Playing;
+    }
 }
 
 void Player::stop() {

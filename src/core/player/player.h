@@ -5,21 +5,17 @@
  Player Module (Taskr)
 =========================================================
 
-Location:
-    src/core/player/
-
 Responsibility:
-    Replays recorded input events.
+    Handles playback of recorded input events.
 
 Role in Engine:
-    Recorder → stores actions
-    Player   → replays actions
+    Recorder → stores input
+    Player   → replays input
     Engine   → controls flow
 
-Design Rules:
-    - No input capture here
-    - Only playback state + control
-    - Frame update handled externally
+Design:
+    - No input capture
+    - Pure playback state machine
 =========================================================
 */
 
@@ -45,5 +41,5 @@ public:
     bool isStopped() const;
 
 private:
-    PlayerState m_state;
+    PlayerState m_state = PlayerState::Stopped;
 };

@@ -2,45 +2,50 @@
 
 /*
 =========================================================
- Recorder Implementation (Skeleton)
+ Recorder Implementation
 =========================================================
 */
 
 Recorder::Recorder()
-    : m_isRecording(false)
+    : m_state(RecorderState::Stopped)
 {
-    // Reserved for setup
 }
 
 Recorder::~Recorder() {
     stopRecording();
 }
 
-void Recorder::initialize() {
-    // Future:
-    // - Prepare event buffer
-    // - Hook input system (keyboard/mouse)
-}
-
-void Recorder::shutdown() {
-    // Future:
-    // - Stop recording safely
-    stopRecording();
-}
-
 void Recorder::startRecording() {
-    // Future:
-    // - Begin capturing input events
-    // - Push events into memory buffer
-    m_isRecording = true;
+    if (m_state != RecorderState::Recording) {
+        m_state = RecorderState::Recording;
+
+        // Future:
+        // - clear event buffer
+        // - begin capturing input
+    }
 }
 
 void Recorder::stopRecording() {
+    m_state = RecorderState::Stopped;
+
     // Future:
-    // - Stop capturing input events
-    m_isRecording = false;
+    // - finalize recording session
+}
+
+void Recorder::pauseRecording() {
+    if (m_state == RecorderState::Recording) {
+        m_state = RecorderState::Paused;
+    }
 }
 
 bool Recorder::isRecording() const {
-    return m_isRecording;
+    return m_state == RecorderState::Recording;
+}
+
+bool Recorder::isPaused() const {
+    return m_state == RecorderState::Paused;
+}
+
+bool Recorder::isStopped() const {
+    return m_state == RecorderState::Stopped;
 }
