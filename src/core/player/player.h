@@ -1,23 +1,8 @@
 #pragma once
 
-/*
-=========================================================
- Player Module (Taskr)
-=========================================================
-
-Responsibility:
-    Handles playback of recorded input events.
-
-Role in Engine:
-    Recorder → stores input
-    Player   → replays input
-    Engine   → controls flow
-
-Design:
-    - No input capture
-    - Pure playback state machine
-=========================================================
-*/
+#include <vector>
+#include "../events/input_events.h"
+#include <windows.h>
 
 enum class PlayerState {
     Stopped,
@@ -25,15 +10,37 @@ enum class PlayerState {
     Paused
 };
 
+/*
+=========================================================
+ Player Module (Taskr)
+=========================================================
+
+Responsibility:
+    Replays recorded mouse input events.
+
+Flow:
+    Recorder → stores events
+    Player   → plays events back
+    Engine   → controls execution
+
+Design:
+    - Time-based playback
+    - No input capture
+=========================================================
+*/
+
 class Player {
 public:
     Player();
     ~Player();
 
     // Playback control
-    void play();
+    void play(const std::vector<MouseEvent>& events);
     void stop();
     void pause();
+
+    // Called every frame
+    void update();
 
     // State queries
     bool isPlaying() const;
@@ -42,4 +49,9 @@ public:
 
 private:
     PlayerState m_state = PlayerState::Stopped;
+
+    std::vector<MouseEvent> m_events;
+    size_t m_index = 0;
+
+    long long m_startTime = 0;
 };

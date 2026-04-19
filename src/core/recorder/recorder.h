@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include "../events/input_events.h"
+#include <windows.h>
 
 /*
 =========================================================
@@ -7,16 +9,12 @@
 =========================================================
 
 Responsibility:
-    Records user input events (keyboard + mouse)
-    for later playback by Player.
-
-Role in Engine:
-    Input → Recorder → Player → Engine
+    Records user input events (mouse for now)
 
 Design:
-    - No playback logic
-    - State-based recording system
-    - Future: event buffer storage
+    - State-driven (Stopped / Recording / Paused)
+    - Stores timestamped input events
+    - No playback logic here
 =========================================================
 */
 
@@ -36,14 +34,21 @@ public:
     void stopRecording();
     void pauseRecording();
 
+    // Called every frame (VERY IMPORTANT)
+    void update();
+
     // State queries
     bool isRecording() const;
     bool isPaused() const;
     bool isStopped() const;
 
+    // Access recorded data
+    const std::vector<MouseEvent>& getEvents() const;
+
 private:
     RecorderState m_state = RecorderState::Stopped;
 
-    // Future:
-    // std::vector<InputEvent> m_events;
+    long long m_startTime = 0;
+
+    std::vector<MouseEvent> m_events;
 };

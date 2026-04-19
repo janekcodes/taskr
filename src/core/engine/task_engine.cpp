@@ -6,15 +6,14 @@
 =========================================================
 */
 
-TaskEngine::TaskEngine() {
-}
+TaskEngine::TaskEngine() {}
 
 TaskEngine::~TaskEngine() {
     shutdown();
 }
 
 void TaskEngine::initialize() {
-    // Future: initialize systems if needed
+    // reserved for future systems
 }
 
 void TaskEngine::shutdown() {
@@ -22,29 +21,40 @@ void TaskEngine::shutdown() {
     m_recorder.stopRecording();
 }
 
+/*
+=========================================================
+ MAIN UPDATE LOOP
+=========================================================
+*/
+
 void TaskEngine::update() {
-    // Update input systems
+    // input polling
     Keyboard::update();
     Mouse::update();
 
-    // Future: pass input into recorder here
+    // ===============================
+    // RECORDING
+    // ===============================
     if (m_recorder.isRecording()) {
-        // TODO: capture input events
+        m_recorder.update(); // 🔥 THIS WAS MISSING
     }
 
-    // Future: playback execution
+    // ===============================
+    // PLAYBACK
+    // ===============================
     if (m_player.isPlaying()) {
-        // TODO: replay recorded events
+        m_player.update(); // 🔥 THIS WAS MISSING
     }
 }
 
 /*
 =========================================================
- External Control (UI Hooks)
+ CONTROL FROM UI
 =========================================================
 */
 
 void TaskEngine::startRecording() {
+    m_player.stop();               // stop playback if active
     m_recorder.startRecording();
 }
 
@@ -57,7 +67,8 @@ void TaskEngine::pauseRecording() {
 }
 
 void TaskEngine::play() {
-    m_player.play();
+    // 🔥 IMPORTANT: pass recorded data into player
+    m_player.play(m_recorder.getEvents());
 }
 
 void TaskEngine::stopPlayback() {
@@ -66,7 +77,7 @@ void TaskEngine::stopPlayback() {
 
 /*
 =========================================================
- State Queries
+ STATE QUERIES
 =========================================================
 */
 
