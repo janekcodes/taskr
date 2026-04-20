@@ -19,6 +19,14 @@
 
 ---
 
+## Overview
+
+Taskr is a native Windows automation tool built in C++ with a focus on performance, simplicity, and control. It enables users to record, replay, and automate system level interactions without relying on external runtimes or scripting environments.
+
+The project prioritizes a minimal core while remaining extensible, making it suitable for both simple automation tasks and more advanced workflows.
+
+---
+
 ## Navigation
 
 - [Architecture](docs/ARCHITECTURE.md)
