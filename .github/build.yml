@@ -1,0 +1,29 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-2025
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake --preset windows-msvc
+
+      - name: Build (Debug)
+        run: cmake --build --preset debug
+
+      - name: Build (Release)
+        run: cmake --build --preset release
+
+      - name: Upload taskr.exe
+        uses: actions/upload-artifact@v4
+        with:
+          name: taskr-windows-x64
+          path: build/Release/taskr.exe
