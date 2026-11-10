@@ -1,0 +1,16 @@
+# Build output
+build/
+out/
+*.exe
+*.pdb
+*.obj
+*.ilk
+
+# IDE
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Personal CMake settings
+CMakeUserPresets.json

@@ -1,0 +1,5 @@
+{
+  "editor.formatOnSave": true,
+  "C_Cpp.formatting": "clangFormat",
+  "cmake.useCMakePresets": "always"
+}

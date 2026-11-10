@@ -1,0 +1,16 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "windows-msvc",
+      "displayName": "Windows x64 (MSVC)",
+      "generator": "Visual Studio 18 2026",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build"
+    }
+  ],
+  "buildPresets": [
+    { "name": "debug",   "configurePreset": "windows-msvc", "configuration": "Debug" },
+    { "name": "release", "configurePreset": "windows-msvc", "configuration": "Release" }
+  ]
+}
